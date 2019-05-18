@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PUBG SOUNDBOARD</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">AWM</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">KAR98</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">Supp-M24</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">Supp-Kar</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">Supp-AWM</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">M416</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">DP-28</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">Win-94</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">Flare Gun</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/AWM_Shot.ogg"></audio>
+  <audio data-key="83" src="sounds/Kar.mp3"></audio>
+  <audio data-key="68" src="sounds/Suppressed_M24_Shot.ogg"></audio>
+  <audio data-key="70" src="sounds/Suppressed-Kar.ogg"></audio>
+  <audio data-key="71" src="sounds/Suppressed_AWM_Shot.ogg"></audio>
+  <audio data-key="72" src="sounds/M416-single.ogg"></audio>
+  <audio data-key="74" src="sounds/DP28-shots.ogg"></audio>
+  <audio data-key="75" src="sounds/Win94-shots.ogg"></audio>
+  <audio data-key="76" src="sounds/Shot-Flare_gun.ogg"></audio>
+
+<script>
+window.addEventListener('keydown',function(e){
+    const audio = document.querySelector(`audio[data-key ="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key ="${e.keyCode}"]`);
+    if(!audio) return;
+    audio.currentTime = 0;
+    key.classList.add('playing'); 
+    audio.play();
+    const keys = document.querySelectorAll('.key');
+    function removeTransition(e)
+    {
+        if(e.propertyName !== 'transform') return;
+        this.classList.remove('playing');
+        this.classList.add('key');
+        
+    }
+    keys.forEach(key => key.addEventListener('transitionend',removeTransition));
+});
+</script>
+
+
+</body>
+</html>
